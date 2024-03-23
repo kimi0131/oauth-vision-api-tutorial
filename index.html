@@ -76,7 +76,7 @@
 		  requests: [
 		      {
 			  features: {
-			      type: 'LABEL_DETECTION'
+			      type: 'TEXT_DETECTION'
 			  },
 			  image: {
 			      // have to extract only the image data from dataURL
@@ -91,18 +91,19 @@
 	      // Simply output the response
 	      console.log(json);
 	      results.innerHTML = '';
-	      json.responses[0].labelAnnotations.forEach( annotation => {
+		  let detectedText = json.responses[0].fullTextAnnotation.text
+		//   .forEach( annotation => {
 		  let description = document.createElement('span');
-		  let score = document.createElement('span');
+		//   let score = document.createElement('span');
 
 		  let div = document.createElement('div');
-		  description.innerText = annotation.description;
-		  score.innerText = annotation.score;
+		  description.innerText = `The word you scan is ${detectedText}`;
+		//   score.innerText = annotation.score;
 
-		  div.append(description,score);
+		  div.append(description);
 
 		  results.append(div);
-	      });
+	    //   });
 	  });
       });
       
